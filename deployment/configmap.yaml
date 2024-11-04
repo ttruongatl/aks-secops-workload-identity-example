@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aks-secops-workload-identity-example-config
+  namespace: aks-secops-workload-identity-example
+data:
+  key_vault_name: ${KEY_VAULT_NAME}
+  secret_name: "aks-secops-dummy-secret"

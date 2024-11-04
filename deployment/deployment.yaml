@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-secops-workload-identity-example
+  namespace: aks-secops-workload-identity-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aks-secops-workload-identity-example
+  template:
+    metadata:
+      labels:
+        app: aks-secops-workload-identity-example
+        azure.workload.identity/use: "true"
+    spec:
+      serviceAccountName: aks-secops-workload-identity-example
+      containers:
+      - name: aks-secops-workload-identity-example
+        image: ${ACR_NAME}.azurecr.io/aks-secops-workload-identity-example:${IMAGE_TAG}
+        imagePullPolicy: Always
+        env:
+        - name: KEY_VAULT_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: aks-secops-workload-identity-example-config
+              key: key_vault_name
+        - name: SECRET_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: aks-secops-workload-identity-example-config
+              key: secret_name
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"

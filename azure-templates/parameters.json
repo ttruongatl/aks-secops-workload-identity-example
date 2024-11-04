@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "eastus2"
+        },
+        "vnetName": {
+            "value": "vnet-aks-secops-example"
+        },
+        "aksClusterName": {
+            "value": "aks-secops-example"
+        },
+        "keyVaultName": {
+            "value": "kv-secops-example"
+        },
+        "aksNodePoolCount": {
+            "value": 1
+        },
+        "aksNodePoolVmSize": {
+            "value": "Standard_D2s_v3"
+        },
+        "kubernetesVersion": {
+            "value": "1.28.11"
+        }
+    }
+}
